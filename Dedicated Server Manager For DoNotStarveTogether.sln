@@ -5,6 +5,16 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMgrClient", "DSMgrClient\DSMgrClient.csproj", "{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BashCode", "BashCode", "{50E0EE57-532A-45FE-B8B2-191201C56ADB}"
+	ProjectSection(SolutionItems) = preProject
+		BashCode\dst_autoupdate.sh = BashCode\dst_autoupdate.sh
+		BashCode\dst_shutdown_hikarimimamorusakamichide.sh = BashCode\dst_shutdown_hikarimimamorusakamichide.sh
+		BashCode\dst_start_hikarimimamorusakamichide.sh = BashCode\dst_start_hikarimimamorusakamichide.sh
+		BashCode\dst_update.sh = BashCode\dst_update.sh
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMgrServerMainModule", "DSMgrServerMainModule\DSMgrServerMainModule.csproj", "{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,10 @@ Global
 		{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

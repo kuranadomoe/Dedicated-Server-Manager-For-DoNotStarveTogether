@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DSMgrClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Dedicated Server Manager For DoNotStarveTogether")]
+[assembly: AssemblyDescription("用于辅助管理饥荒独立服务器的C/S工具")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DSMgrClient")]
+[assembly: AssemblyCompany("kuranadomoe")]
+[assembly: AssemblyProduct("kuranado.moe.DedicatedServerManager.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

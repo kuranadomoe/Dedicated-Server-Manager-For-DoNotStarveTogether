@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>kuranado.moe.DedicatedServerManager.Server.MainModule</RootNamespace>
+    <Authors>kuranadomoe</Authors>
+    <Description>饥荒独立服务器管理程序主模块</Description>
+  </PropertyGroup>
+
+</Project>
