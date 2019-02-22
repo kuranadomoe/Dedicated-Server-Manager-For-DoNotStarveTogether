@@ -6,6 +6,7 @@
     <RootNamespace>kuranado.moe.DedicatedServerManager.Server.MainModule</RootNamespace>
     <Authors>kuranadomoe</Authors>
     <Description>饥荒独立服务器管理程序主模块</Description>
+    <AssemblyName>kuranado.moe.DedicatedServerManager.DSMgrServerMainModule</AssemblyName>
   </PropertyGroup>
 
 </Project>

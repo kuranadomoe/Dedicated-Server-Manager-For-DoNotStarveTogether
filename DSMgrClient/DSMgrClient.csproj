@@ -7,7 +7,7 @@
     <ProjectGuid>{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>kuranado.moe.DedicatedServerManager.Client</RootNamespace>
-    <AssemblyName>DSMgrClient</AssemblyName>
+    <AssemblyName>kuranado.moe.DedicatedServerManager.DSMgrClient</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
