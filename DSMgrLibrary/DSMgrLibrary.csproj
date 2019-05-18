@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>kuranado.moe.DedicatedServerManager.DSMgrLibrary</AssemblyName>
-    <RootNamespace>kuranado.moe.DedicatedServerManager.Library</RootNamespace>
-  </PropertyGroup>
-
-</Project>

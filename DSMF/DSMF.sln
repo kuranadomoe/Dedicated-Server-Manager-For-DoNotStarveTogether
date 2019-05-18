@@ -3,25 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMgrClient", "DSMgrClient\DSMgrClient.csproj", "{EC6323D6-F516-42D0-B2DB-4B4DBBF68841}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BashCode", "BashCode", "{50E0EE57-532A-45FE-B8B2-191201C56ADB}"
-	ProjectSection(SolutionItems) = preProject
-		BashCode\dst_autoupdate.sh = BashCode\dst_autoupdate.sh
-		BashCode\dst_shutdown_hikarimimamorusakamichide.sh = BashCode\dst_shutdown_hikarimimamorusakamichide.sh
-		BashCode\dst_start_hikarimimamorusakamichide.sh = BashCode\dst_start_hikarimimamorusakamichide.sh
-		BashCode\dst_update.sh = BashCode\dst_update.sh
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSMgrServerMainModule", "DSMgrServerMainModule\DSMgrServerMainModule.csproj", "{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B668EA65-E25B-479D-BB78-991FCEFAB91B}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMgrLibrary", "DSMgrLibrary\DSMgrLibrary.csproj", "{F972A705-319A-453B-9FCF-607369ADA57E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSMF", "DSMF\DSMF.csproj", "{CF9CA3E4-5F06-4CD4-ACB5-58858EF9759C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

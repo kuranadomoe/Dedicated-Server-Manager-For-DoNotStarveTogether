@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>kuranado.moe.DSMF</RootNamespace>
+    <Authors>kuranadomoe</Authors>
+    <Description>饥荒专用服管理框架</Description>
+    <AssemblyName>dsmf</AssemblyName>
+  </PropertyGroup>
+
+</Project>
