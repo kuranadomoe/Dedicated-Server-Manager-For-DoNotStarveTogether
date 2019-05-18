@@ -1,2 +1,2 @@
-# Dedicated-Server-Manager-For-DoNotStarveTogether
-饥荒独立服管理程序
+# Dedicated Server Management Framework For DoNotStarveTogether
+饥荒独立服管理框架
