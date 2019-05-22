@@ -5,56 +5,59 @@
 #              written by kuranadomoe                      #
 #                       2018/7/20                          #
 #                                                          #
-#                   自动更新饥荒服务器                        #
+#                   自动更新饥荒服务器                     #
 #**********************************************************#
 
 
 
 
 #**********************************************************#
-#                     在这里自定义你的配置                    #
+#                     在这里自定义你的配置                 #
 
 
-#	检测更新时间间隔: s表示秒,m表示分钟,h表示小时,d表示day
-#	例如:	1h2m3s表示1小时2分钟3秒
+#    检测更新时间间隔: s表示秒,m表示分钟,h表示小时,d表示day
+#    例如:    1h2m3s表示1小时2分钟3秒
 interval=4m
 
-#	在检测到可用更新后,过多少时间再关闭服务器进行更新
-#	规则和上面差不多
+#    在检测到可用更新后,过多少时间再关闭服务器进行更新
+#    规则和上面差不多
 announceTime=4m
 
-#	你的steam路径,多数教程是这个,如果你的不是,自己改
+#    你的steam路径,多数教程是这个,如果你的不是,自己改
 steamPath=$HOME/steamcmd
 
-#	你的饥荒安装的路径,默认就是这个路径...$HOME表示用户目录
-#	路径最后面不要加/
+#    你的饥荒安装的路径,默认就是这个路径...$HOME表示用户目录
+#    路径最后面不要加/
 dstPath="$HOME/Steam/steamapps/common/Don't Starve Together Dedicated Server"
 
-#	额外的安装参数,如果不需要就不必填
-#	例如:	联机月岛测试服填的是	-beta returnofthembeta
+#    额外的安装参数,如果不需要就不必填
+#    例如:    联机月岛测试服填的是    -beta returnofthembeta
 installArgs=''
 
-#	地上/地下,enable表示需要启动
-#	如果是两台服务器组成的饥荒服,每台就只需要启动一个了
-#	把enable改成disable就不启动
+#    地上/地下,enable表示需要启动
+#    如果是两台服务器组成的饥荒服,每台就只需要启动一个了
+#    把enable改成disable就不启动
 master='enable'
 caves='enable'
 
-#	screen名字,地上世界和地下世界的
+#    screen名字,地上世界和地下世界的
 masterName='dst_master'
 cavesName='dst_caves'
 
-#	你存档的目录名称,如果是一台服务器上运行地上地下,那么这两个是相同的
+#    你存档的目录名称,如果是一台服务器上运行地上地下,那么这两个是相同的
 masterDir='Cluster_1'
 cavesDir='Cluster_1'
 
-#	更新日志:	如果希望记录这个脚本的更新日志,可以修改这个值
-#	用法:	在单引号内填入文件名(可以指定路径),
-#	例如:	'QwQ.log'表示将日志记录到QwQ.log这个文件内
-updateLog=''
+#    更新日志:    这个脚本的更新日志的路径
+#    可以把它改成自己喜欢的路径,如果不想记录,就把它改成''
+#    用法:    在单引号内填入文件名(可以指定目录)
+updateLog='./dst_autoupdate.log'
 
-#	服务器控制台日志路径
-screenLog=''
+#    存放服务器控制台日志的目录
+#    如果不想记录日志,就把他改成''
+#    例如填了$/HOME/dst/logs的话,
+#    将会在用户目录的dst/logs这个目录下生成screen的日志
+screenLog=$HOME/dst/logs
 
 
 #                                                          #
@@ -74,12 +77,12 @@ function main()
     argv=($0 $@)
     argc=$#
 
-	preProc "$@";
-	if [ "$1" != "foreground" ]; then
-        screen -mdS dst_autoupdate bash -c "$0 foreground $updateLog"
-		exit 0
-	fi;
-	
+    preProc "$@";
+    if [ "$1" != "foreground" ]; then
+            screen -mdS dst_autoupdate bash -c "$0 foreground $updateLog"
+        exit 0
+    fi;
+    
     echo 'running...';
     echo
     for((;;))
@@ -89,38 +92,48 @@ function main()
         getLatestVerNO;
 
         if [ $latestVersion -gt $curVersion ] ;then
-			echo $(date +%F/%T)
-			echo
-			echo 'current version:'$curVersion
-			echo 'latest version :'$latestVersion
-			echo
+
+            echo $(date +%F/%T)
+            echo
+            echo 'current version:'$curVersion
+            echo 'latest version :'$latestVersion
+            echo
+
             shutdownPreparation;
             shutdown;
             update;
             start;
+
+            echo
+            echo
+            echo
+            echo
+
         fi;
 
-        #	检测
-        echo 'sleeping...';
-        sleep interval
+        sleep $interval
 
     done
 
     return 0;
 }
 
-#	对用户的设置进行预处理
+#    对用户的设置进行预处理
+screenLogMaster=''
+screenLogCaves=''
 function preProc()
 {
-	if [ "$updateLog" != "" ]; then
-		updateLog=" >> "$updateLog
-	fi;
-	if [ "$screenLog" != "" ]; then
-		screenLog=" > "$screenLog"$(date +%F/%T)"
-	fi;
+    if [ "$updateLog" != "" ]; then
+        updateLog=" >> "$updateLog
+    fi;
+    if [ "$screenLog" != "" ]; then
+        screenLog=" > "$screenLog"/$(date +%F_%T)"
+        screenLogMaster=$screenLog"_master.log"
+        screenLogCaves=$screenLog"_caves.log"
+    fi;
 }
 
-#	获取当前饥荒的版本号
+#    获取当前饥荒的版本号
 function getCurVerNO()
 {
     dstVerPath=$dstPath/version.txt;
@@ -128,7 +141,7 @@ function getCurVerNO()
     curVersion=$curVer;
 }
 
-#	从klei网站爬取最新版本号
+#    从klei网站爬取最新版本号
 function getLatestVerNO()
 {
     versions=(`curl -s https://forums.kleientertainment.com/game-updates/dst | awk '/com\/game-updates\/dst\/[0-9].*?data-currentRelease/{print}' | grep -oE '[0-9]{6,}'`);
@@ -143,54 +156,66 @@ function getLatestVerNO()
     latestVersion=$maxVer;
 }
 
-#	启动服务器
+#    启动服务器
 function start()
 {
+    echo
     echo 'starting...';
+
     cd $dstPath/bin;
-	if [ "$master" = "enable" ]; then
-		screen -mdS $masterName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $masterDir -shard Master $screenLog_master.log"
-	fi;
-	if [ "$caves" = "enable" ]; then
-		screen -mdS $cavesName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $cavesDir -shard Caves $screenLog_caves.log"
-	fi;
+    if [ "$master" = "enable" ]; then
+    echo 'starting master...';
+        screen -mdS $masterName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $masterDir -shard Master $screenLogMaster";
+    fi;
+    if [ "$caves" = "enable" ]; then
+    echo 'starting caves';
+        screen -mdS $cavesName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $cavesDir -shard Caves $screenLogCaves";
+    fi;
+    echo 'started...'
     return 0;
 }
 
-#	关闭服务器之前进行的公告
+#    关闭服务器之前进行的公告
 function shutdownPreparation()
 {
+    echo
     echo 'preparation for shutdown ...';
-	if [ "$master" = "enable" ]; then
-		screen -X -S $masterName stuff 'c_announce("服务器将于'$announceTime'后关机进行更新,请做好准备~")\n';
-	fi;
-	if [ "$caves" = "enable" ]; then
-		screen -X -S $cavesName stuff 'c_announce(服务器将于'$announceTime'后关机进行更新,请做好准备~)\n';
-	fi;
-    sleep announceTime;
+    if [ "$master" = "enable" ]; then
+        screen -X -S $masterName stuff 'c_announce("服务器将于'$announceTime'后关机进行更新,请做好准备~")\n';
+    fi;
+    if [ "$caves" = "enable" ]; then
+        screen -X -S $cavesName stuff 'c_announce(服务器将于'$announceTime'后关机进行更新,请做好准备~)\n';
+    fi;
+    sleep $announceTime;
+    echo 'preparation OK...'
     return 0;
 }
 
-#	关闭服务器
+#    关闭服务器
 function shutdown()
 {
+    echo
     echo 'shutting down...';
-	if [ "$master" = "enable" ]; then
-		screen -X -S $masterName stuff 'c_shutdown()\n';
-	fi;
-	if [ "$caves" = "enable" ]; then
-		screen -X -S $cavesName stuff 'c_shutdown()\n';
-	fi;
+    if [ "$master" = "enable" ]; then
+        screen -X -S $masterName stuff 'c_shutdown()\n';
+    fi;
+    if [ "$caves" = "enable" ]; then
+        screen -X -S $cavesName stuff 'c_shutdown()\n';
+    fi;
+    echo 'shutdown OK...'
     return 0;
 }
 
-#	更新饥荒
+#    更新饥荒
 function update()
 {
+    echo
     echo 'updating...';
     cd $steamPath;
     ./steamcmd.sh +login anonymous +force_install_dir $dstPath +app_update 343050 $installArgs validate +quit;
+    echo 'update OK...'
     return 0;
 }
 
 main "$@";
+
