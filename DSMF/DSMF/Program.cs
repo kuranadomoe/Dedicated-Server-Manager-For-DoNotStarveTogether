@@ -22,7 +22,9 @@ namespace kuranado.moe.DedicatedServerManager.Server.MainModule
             Pause();
         }
 
-
+        /// <summary>
+        /// Pause
+        /// </summary>
         [Conditional("DEBUG")]
         private static void Pause()
         {

@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace kuranado.moe.DedicatedServerManager.Library
+namespace kuranado.moe.DSMF.DsmfLib
 {
     /// <summary>
     /// <para>饥荒独立服管理器日志追踪类</para>

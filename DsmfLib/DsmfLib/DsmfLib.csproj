@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>CommonLibrary</AssemblyName>
-    <RootNamespace>kuranado.moe.DSMF.CommonLibrary</RootNamespace>
+    <AssemblyName>DsmfLib</AssemblyName>
+    <RootNamespace>kuranado.moe.DSMF.DsmfLib</RootNamespace>
   </PropertyGroup>
 
 </Project>

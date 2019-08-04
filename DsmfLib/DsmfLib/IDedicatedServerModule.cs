@@ -1,4 +1,4 @@
-﻿namespace kuranado.moe.DedicatedServerManager.Library
+﻿namespace kuranado.moe.DSMF.DsmfLib
 {
     /// <summary>
     /// <para>饥荒独立服模块接口</para>
