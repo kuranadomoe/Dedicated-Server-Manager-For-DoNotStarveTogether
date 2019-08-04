@@ -31,7 +31,7 @@ steamPath=$HOME/steamcmd
 dstPath="$HOME/Steam/steamapps/common/Don't Starve Together Dedicated Server"
 
 #    额外的安装参数,如果不需要就不必填
-#    例如:    联机月岛测试服填的是    -beta returnofthembeta
+#    例如:    联机旧神测试服填的是    -beta returnofthembeta
 installArgs=''
 
 #    地上/地下,enable表示需要启动
@@ -125,11 +125,14 @@ function preProc()
 {
     if [ "$updateLog" != "" ]; then
         updateLog=" >> "$updateLog
+        echo "setting updateLog =  $updateLog"
     fi;
     if [ "$screenLog" != "" ]; then
-        screenLog=" > "$screenLog"/$(date +%F_%T)"
-        screenLogMaster=$screenLog"_master.log"
-        screenLogCaves=$screenLog"_caves.log"
+        screenLogMaster=" > "$screenLog"/$(date +%F_%T)_master.log"
+        screenLogCaves=" > "$screenLog"/$(date +%F_%T)_caves.log"
+        echo "setting screenLog = $screenLog"
+        echo "setting screenLogMaster = $screenLogMaster"
+        echo "setting screenLogCaves = $screenLogCaves"
     fi;
 }
 
@@ -161,17 +164,22 @@ function start()
 {
     echo
     echo 'starting...';
+    echo $(date +%F_%T)
 
     cd $dstPath/bin;
     if [ "$master" = "enable" ]; then
-    echo 'starting master...';
+        screenLogMaster=" > "$screenLog"/$(date +%F_%T)_master.log"
+        echo 'starting master...';
         screen -mdS $masterName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $masterDir -shard Master $screenLogMaster";
+        echo "started~ argument:    screen -mdS $masterName bash -c \"./dontstarve_dedicated_server_nullrenderer -cluster $masterDir -shard Master $screenLogMaster\"";
     fi;
     if [ "$caves" = "enable" ]; then
-    echo 'starting caves';
+        screenLogCaves=" > "$screenLog"/$(date +%F_%T)_caves.log"
+        echo 'starting caves';
         screen -mdS $cavesName bash -c "./dontstarve_dedicated_server_nullrenderer -cluster $cavesDir -shard Caves $screenLogCaves";
+        echo "started~ argument:    screen -mdS $cavesName bash -c \"./dontstarve_dedicated_server_nullrenderer -cluster $cavesDir -shard Caves $screenLogCaves\"";
     fi;
-    echo 'started...'
+    echo 'all started...'
     return 0;
 }
 
@@ -196,6 +204,8 @@ function shutdown()
 {
     echo
     echo 'shutting down...';
+    echo $(date +%F_%T)
+
     if [ "$master" = "enable" ]; then
         screen -X -S $masterName stuff 'c_shutdown()\n';
     fi;
@@ -214,8 +224,8 @@ function update()
     cd $steamPath;
     ./steamcmd.sh +login anonymous +force_install_dir $dstPath +app_update 343050 $installArgs validate +quit;
     echo 'update OK...'
+    echo $(date +%F_%T)
     return 0;
 }
 
 main "$@";
-
